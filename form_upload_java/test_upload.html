@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test Form</title>
+
+</head>
+<body>
+	<form action="http://localhost:8080/TestUpload" method="post">
+	Form Upload Test: <input id="file-pdf" type="file" name="file-pdf"> 
+		<button type="submit">Submit</button>
+	</form>	
+
+	<script type="text/javascript" src="../js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			$("#submit-pdf").click(function() {
+			  var inputFileImage = document.getElementById("file-pdf");
+			  var file = inputFileImage.files[0];
+			  var data = new FormData();
+			  data.append("file-pdf",file);
+			  $.ajax({
+			    url:   "http://localhost:8080/TestUpload",
+			    type:  'POST',
+			    cache : false,
+			    data : data,
+			    processData : false,
+			    contentType : false,
+			    dataType: "json",       
+			    success:  function (response) {        
+			       if(response.success){
+			          console.log("ok");
+			       }else{
+			           console.log("fail");
+			       } 
+			    }
+			 });    
+			});
+
+		});
+	</script>
+</body>
+</html>
